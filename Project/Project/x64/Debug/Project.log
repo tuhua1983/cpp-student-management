@@ -1,2 +1,9 @@
 ﻿  Project.cpp
-  Project.vcxproj -> E:\项目\cpp-student-management\Project\x64\Debug\Project.exe
+E:\项目\cpp-student-management\Project\Project.cpp(39,2): error C2664: “void processCommand(std::string)”: 无法将参数 1 从“std::vector<std::string,std::allocator<std::string>>”转换为“std::string”
+      E:\项目\cpp-student-management\Project\Project.cpp(39,17):
+      没有可用于执行该转换的用户定义的转换运算符，或者无法调用该运算符
+      E:\项目\cpp-student-management\Project\Project.cpp(9,6):
+      参见“processCommand”的声明
+      E:\项目\cpp-student-management\Project\Project.cpp(39,2):
+      尝试匹配参数列表“(std::vector<std::string,std::allocator<std::string>>)”时
+  

@@ -6,8 +6,9 @@
 using namespace std;
 
 //函数声明
-void processCommand(string);
+void processCommand(vector<string>&);
 void insertStudent();
+void insertScores(vector<string> &);
 
 //学生类
 class Student {
@@ -35,16 +36,21 @@ int main(int argc,char* argv[])
 {
 	vector<string> args(argv, argv + argc);
 	vector<Student> students;
-	processCommand(args[1]);
+	processCommand(args);
 	return 0;
 }
 
 //指令识别函数
-void processCommand(string command){
-	//"-i" 插入学生信息
-	if (command == "-i") {
+void processCommand(vector<string>& args){
+	string command = args[1];
+	//"-add" 插入学生信息
+	if (command == "-add") {
 		insertStudent();
 		return;
+	}
+	//"-i"插入学生成绩
+	else if (command == "-i") {
+		insertScores(args);
 	}
 	//"-d" 删除学生信息
 	else if (command == "-d") {
@@ -66,6 +72,13 @@ void processCommand(string command){
 //插入学生信息函数
 void insertStudent() {
 	cout << "插入学生信息函数调用" << endl;
+
+}
+
+//插入学生成绩函数
+void insertScores(vector<string>& args) {
+	cout << args[2] << endl;
+	cout << args[3] << endl;
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
