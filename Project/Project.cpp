@@ -1,6 +1,7 @@
 ﻿// Project.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //学生成绩管理系统
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
 using namespace std;
@@ -65,11 +66,32 @@ int main(int argc,char* argv[])
 {
 	if (argc<2)
 	{
-		cout << argc <<"请通过终端操作\n";
+		cout <<"请通过终端操作,或输入正确的参数\n";
 		return 0;
 	}
-	vector<string> args(argv, argv + argc);
+
+	//读取文件中的学生信息到students向量
+	ifstream inFile("students.txt", ios::binary | ios::ate);
+	if (inFile.is_open()) {
+		//读取文件内容
+		inFile.close();
+	}
+	else {
+		cout << "无法打开文件进行读取" << endl;
+	}
 	vector<Student> students;
+	int size = inFile.tellg()/sizeof(Student);
+	inFile.seekg(0, ios::beg);
+	for (int i = 0; i < size; i++)
+	{
+		inFile.read((char*)&students[i], sizeof(Student));
+	}
+
+	cout << students.size() << endl;
+	//cout << students[1].getName() << endl; 
+	inFile.close();
+
+	vector<string> args(argv, argv + argc);
 	processCommand(args,students);
 	return 0;
 }
@@ -125,6 +147,18 @@ void insertStudent(vector<string>& args, vector<Student>& students) {
 	Student newStudent;
 	newStudent.initialize(id, name);
 	students.push_back(newStudent);
+
+	//保存students到文件
+	ofstream outFile("students.txt",ios::binary | ios::app);
+	if (outFile.is_open()) {
+		outFile << id << " " << name << endl;
+		outFile.close();
+	}
+	else {
+		cout << "无法打开文件进行写入" << endl;
+	}
+	outFile.write((char*)&newStudent, sizeof(Student));
+	outFile.close();
 }
 
 void listStudents(vector<Student>& students) {
