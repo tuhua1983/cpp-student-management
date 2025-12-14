@@ -5,6 +5,11 @@
 #include <vector>
 using namespace std;
 
+//函数声明
+void processCommand(string);
+void insertStudent();
+
+//学生类
 class Student {
 private:
 	int id;					//学号
@@ -25,9 +30,42 @@ public:
 	}
 };
 
+//主函数
 int main(int argc,char* argv[])
 {
-    
+	vector<string> args(argv, argv + argc);
+	vector<Student> students;
+	processCommand(args[1]);
+	return 0;
+}
+
+//指令识别函数
+void processCommand(string command){
+	//"-i" 插入学生信息
+	if (command == "-i") {
+		insertStudent();
+		return;
+	}
+	//"-d" 删除学生信息
+	else if (command == "-d") {
+		//deleteStudent();
+		return;
+	}
+	//"-u" 更新学生信息
+	else if (command == "-u") {
+		//updateStudent();
+		return;
+	}
+	//"-s" 查询学生信息
+	else if (command == "-s") {
+		//searchStudent();
+		return;
+	}
+}
+
+//插入学生信息函数
+void insertStudent() {
+	cout << "插入学生信息函数调用" << endl;
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
