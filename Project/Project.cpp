@@ -4,6 +4,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <sys/stat.h>
 using namespace std;
 
 //类声明
@@ -71,7 +72,7 @@ int main(int argc,char* argv[])
 	}
 
 	//读取文件中的学生信息到students向量
-	ifstream inFile("students.txt", ios::binary | ios::ate);
+	ifstream inFile("students.txt", ios::binary);
 	if (inFile.is_open()) {
 		//读取文件内容
 		inFile.close();
@@ -80,11 +81,18 @@ int main(int argc,char* argv[])
 		cout << "无法打开文件进行读取" << endl;
 	}
 	vector<Student> students;
-	int size = inFile.tellg()/sizeof(Student);
+	struct stat buf;
+	stat("students.txt", &buf);
+	int size = buf.st_size / sizeof(Student);
+	cout << size << endl;
+	cout << inFile.tellg() << endl;
 	inFile.seekg(0, ios::beg);
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < 3; i++)
 	{
-		inFile.read((char*)&students[i], sizeof(Student));
+		Student temp;
+		inFile.read((char*)&temp, sizeof(Student));
+		cout << temp.getName() << endl;
+		students.push_back(temp);
 	}
 
 	cout << students.size() << endl;

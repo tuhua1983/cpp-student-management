@@ -1,3 +1,2 @@
 ﻿  Project.cpp
-E:\项目\cpp-student-management\Project\Project.cpp(83,11): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
   Project.vcxproj -> E:\项目\cpp-student-management\Project\x64\Debug\Project.exe
