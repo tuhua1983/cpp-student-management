@@ -1,11 +1,33 @@
 ﻿// Project.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
-//
-
+//学生成绩管理系统
 #include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
 
-int main()
+class Student {
+private:
+	int id;					//学号
+	string name;			//姓名
+	vector<float> scores;	//各科成绩
+	float average;			//平均分
+public:
+	Student(int id, string name, vector<float> scores)
+		: id(id), name(name), scores(scores) {
+		calculateAverage();
+	}
+	void calculateAverage() {
+		float sum = 0;
+		for (float score : scores) {
+			sum += score;
+		}
+		average = sum / scores.size();
+	}
+};
+
+int main(int argc,char* argv[])
 {
-    std::cout << "Hello World!\n";
+    
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
