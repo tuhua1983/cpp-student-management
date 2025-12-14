@@ -5,10 +5,14 @@
 #include <vector>
 using namespace std;
 
+//类声明
+class Student;
+
 //函数声明
-void processCommand(vector<string>&);
-void insertStudent();
-void insertScores(vector<string> &);
+void processCommand(vector<string>&, vector<Student>&);
+void insertStudent(vector<string>&, vector<Student>&);
+void insertScores(vector<string>&);
+void listStudents(vector<Student>&);
 
 //学生类
 class Student {
@@ -18,10 +22,21 @@ private:
 	vector<float> scores;	//各科成绩
 	float average;			//平均分
 public:
+
+	//构造函数
+	Student() : id(0), name(""), average(0.0) {}
 	Student(int id, string name, vector<float> scores)
 		: id(id), name(name), scores(scores) {
 		calculateAverage();
 	}
+
+	//学生基本信息初始化函数（不包含成绩）
+	void initialize(int id, string name) {
+		this->id = id;
+		this->name = name;
+	}
+
+	//计算平均分函数
 	void calculateAverage() {
 		float sum = 0;
 		for (float score : scores) {
@@ -29,23 +44,42 @@ public:
 		}
 		average = sum / scores.size();
 	}
+
+	//获取学号
+	int getId() const {
+		return id;
+	}
+	//获取姓名
+	string getName() const {
+		return name;
+	}
+	//获取平均分
+	float getAverage() const {
+		return average;
+	}
+
 };
 
 //主函数
 int main(int argc,char* argv[])
 {
+	if (argc<2)
+	{
+		cout << argc <<"请通过终端操作\n";
+		return 0;
+	}
 	vector<string> args(argv, argv + argc);
 	vector<Student> students;
-	processCommand(args);
+	processCommand(args,students);
 	return 0;
 }
 
 //指令识别函数
-void processCommand(vector<string>& args){
+void processCommand(vector<string>& args, vector<Student>& students){
 	string command = args[1];
 	//"-add" 插入学生信息
 	if (command == "-add") {
-		insertStudent();
+		insertStudent(args,students);
 		return;
 	}
 	//"-i"插入学生成绩
@@ -67,12 +101,38 @@ void processCommand(vector<string>& args){
 		//searchStudent();
 		return;
 	}
+	//"-l" 列出所有学生信息
+	else if (command == "-l") {
+		listStudents(students);
+		return;
+	}
+	else {
+		cout << "无效指令" << endl;
+		return;
+	}
 }
 
 //插入学生信息函数
-void insertStudent() {
+void insertStudent(vector<string>& args, vector<Student>& students) {
 	cout << "插入学生信息函数调用" << endl;
+	int id;
+	string name;
+	vector<float> scores;
+	cout << "学号：";
+	cin >> id;
+	cout << "姓名：";
+	cin >> name;
+	Student newStudent;
+	newStudent.initialize(id, name);
+	students.push_back(newStudent);
+}
 
+void listStudents(vector<Student>& students) {
+	cout << "列出所有学生信息函数调用" << endl;
+	for (const Student& student : students) {
+		//输出学生信息
+		cout << "学号：" << student.getId() << ", 姓名：" << student.getName() << ", 平均分：" << student.getAverage() << endl;
+	}
 }
 
 //插入学生成绩函数
