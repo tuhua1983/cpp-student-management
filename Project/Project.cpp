@@ -69,9 +69,31 @@ public:
 		{
 			os << scores[i];
 			if (i + 1 < scores.size())
-				os << ",";
+				os << " ";
 		}
+		os << "\n";
 		return os.str();
+	}
+
+	//反序列化
+	static Student deserialize(const string& line) {
+		stringstream ss(line);
+		string token;
+
+		getline(ss, token, ',');
+		int id = stoi(token);
+
+		string name;
+		getline(ss, name, ',');
+
+		vector<float> scores;
+		getline(ss, token);
+		stringstream ss2(token);
+		float x;
+		while (ss2 >> x)
+			scores.push_back(x);
+
+		return Student(id, name, scores);
 	}
 
 };
@@ -89,22 +111,13 @@ int main(int argc,char* argv[])
 
 	//读取文件中的学生信息
 	ifstream inFile("students.txt", ios::binary);	//以二进制方式打开文件
+	string line;
 	if (inFile.is_open()) {							//文件成功打开
 		//读取文件内容
-		struct stat buf;
-		stat("students.txt", &buf);
-		int size = buf.st_size/sizeof(Student);
-		cout << "文件中共有" << size << "个学生记录" << endl;
-		for (int i = 0; i < size; i++)
-		{
-			Student temp;
-			inFile.read((char*)&temp, sizeof(Student));
-			cout << temp.getId() << " " << temp.getName() << endl;
-			students.push_back(temp);
+		while (getline(inFile, line)) {
+			students.push_back(Student::deserialize(line));
 		}
-		cout << "循环结束\n";
 		inFile.close();
-		cout << "学生信息读取完毕" << endl;
 	}
 	else {											//文件打开失败
 		cout << "无法打开文件进行读取" << endl;
@@ -169,9 +182,9 @@ void insertStudent(vector<string>& args, vector<Student>& students) {
 	students.push_back(newStudent);
 
 	//保存students到文件
-	ofstream outFile("students.txt",ios::binary | ios::app);
+	ofstream outFile("students.txt", ios::app);
 	if (outFile.is_open()) {
-		outFile.write((char*)&newStudent, sizeof(Student));
+		outFile << newStudent.serialize();
 		outFile.close();
 	}
 	else {
