@@ -71,33 +71,35 @@ int main(int argc,char* argv[])
 		return 0;
 	}
 
-	//读取文件中的学生信息到students向量
-	ifstream inFile("students.txt", ios::binary);
-	if (inFile.is_open()) {
+	vector<Student> students;	//创建学生对象数组
+
+	//读取文件中的学生信息
+	ifstream inFile("students.txt", ios::binary);	//以二进制方式打开文件
+	if (inFile.is_open()) {							//文件成功打开
 		//读取文件内容
+		struct stat buf;
+		stat("students.txt", &buf);
+		int size = buf.st_size / sizeof(Student);
+		cout << size << endl;
+		cout << inFile.tellg() << endl;
+		inFile.seekg(0, ios::beg);
+		for (int i = 0; i < size; i++)
+		{
+			Student temp;
+			inFile.read((char*)&temp, sizeof(Student));
+			cout << temp.getName() << endl;
+			students.push_back(temp);
+		}
+
 		inFile.close();
 	}
-	else {
+	else {											//文件打开失败
 		cout << "无法打开文件进行读取" << endl;
 	}
-	vector<Student> students;
-	struct stat buf;
-	stat("students.txt", &buf);
-	int size = buf.st_size / sizeof(Student);
-	cout << size << endl;
-	cout << inFile.tellg() << endl;
-	inFile.seekg(0, ios::beg);
-	for (int i = 0; i < 3; i++)
-	{
-		Student temp;
-		inFile.read((char*)&temp, sizeof(Student));
-		cout << temp.getName() << endl;
-		students.push_back(temp);
-	}
+	
 
 	cout << students.size() << endl;
 	//cout << students[1].getName() << endl; 
-	inFile.close();
 
 	vector<string> args(argv, argv + argc);
 	processCommand(args,students);
