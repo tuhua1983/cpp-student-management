@@ -202,6 +202,7 @@ void listStudents(vector<Student>& students) {
 
 //插入学生成绩函数
 void insertScores(vector<string>& args) {
+	cout << "插入学生成绩函数调用\n";
 	cout << args[2] << endl;
 	cout << args[3] << endl;
 }
