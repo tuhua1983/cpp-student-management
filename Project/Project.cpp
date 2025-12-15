@@ -14,7 +14,7 @@ class Student;
 //函数声明
 void processCommand(vector<string>&, vector<Student>&);
 void insertStudent(vector<string>&, vector<Student>&);
-void insertScores(vector<string>&);
+void insertScores(vector<string>&, vector<Student>&);
 void listStudents(vector<Student>&);
 
 //学生类
@@ -145,7 +145,7 @@ void processCommand(vector<string>& args, vector<Student>& students){
 	}
 	//"-i"插入学生成绩
 	else if (command == "-i") {
-		insertScores(args);
+		insertScores(args,students);
 	}
 	//"-d" 删除学生信息
 	else if (command == "-d") {
@@ -207,10 +207,20 @@ void listStudents(vector<Student>& students) {
 }
 
 //插入学生成绩函数
-void insertScores(vector<string>& args) {
+void insertScores(vector<string>& args, vector<Student>& students) {
 	cout << "插入学生成绩函数调用\n";
 	vector<float> scores;
-	scores.push_back(stof(args[2]));
+	for (int i = 2; i < args.size(); i++)
+	{
+		scores.push_back(stof(args[i]));
+	}
+	for(Student& student : students)
+	{
+		if (student.getName() == args[1])
+		{
+			student.insertScores(scores);
+		}
+	}
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
