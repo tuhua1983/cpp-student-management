@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <sys/stat.h>
+#include <sstream>
 using namespace std;
 
 //类声明
@@ -60,6 +61,19 @@ public:
 		return average;
 	}
 
+	//序列化
+	string serialize() {
+		ostringstream os;
+		os << id << "," << name << ",";
+		for (int i = 0; i < scores.size(); i++)
+		{
+			os << scores[i];
+			if (i + 1 < scores.size())
+				os << ",";
+		}
+		return os.str();
+	}
+
 };
 
 //主函数
@@ -79,28 +93,23 @@ int main(int argc,char* argv[])
 		//读取文件内容
 		struct stat buf;
 		stat("students.txt", &buf);
-		int size = buf.st_size / sizeof(Student);
-		cout << size << endl;
-		cout << inFile.tellg() << endl;
-		inFile.seekg(0, ios::beg);
+		int size = buf.st_size/sizeof(Student);
+		cout << "文件中共有" << size << "个学生记录" << endl;
 		for (int i = 0; i < size; i++)
 		{
 			Student temp;
 			inFile.read((char*)&temp, sizeof(Student));
-			cout << temp.getName() << endl;
+			cout << temp.getId() << " " << temp.getName() << endl;
 			students.push_back(temp);
 		}
-
+		cout << "循环结束\n";
 		inFile.close();
+		cout << "学生信息读取完毕" << endl;
 	}
 	else {											//文件打开失败
 		cout << "无法打开文件进行读取" << endl;
 	}
 	
-
-	cout << students.size() << endl;
-	//cout << students[1].getName() << endl; 
-
 	vector<string> args(argv, argv + argc);
 	processCommand(args,students);
 	return 0;
@@ -108,6 +117,7 @@ int main(int argc,char* argv[])
 
 //指令识别函数
 void processCommand(vector<string>& args, vector<Student>& students){
+	cout << "指令识别函数调用" << endl;
 	string command = args[1];
 	//"-add" 插入学生信息
 	if (command == "-add") {
@@ -161,14 +171,12 @@ void insertStudent(vector<string>& args, vector<Student>& students) {
 	//保存students到文件
 	ofstream outFile("students.txt",ios::binary | ios::app);
 	if (outFile.is_open()) {
-		outFile << id << " " << name << endl;
+		outFile.write((char*)&newStudent, sizeof(Student));
 		outFile.close();
 	}
 	else {
 		cout << "无法打开文件进行写入" << endl;
 	}
-	outFile.write((char*)&newStudent, sizeof(Student));
-	outFile.close();
 }
 
 void listStudents(vector<Student>& students) {
