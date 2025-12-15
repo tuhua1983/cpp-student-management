@@ -39,6 +39,12 @@ public:
 		this->name = name;
 	}
 
+	//插入成绩函数
+	void insertScores(const vector<float>& newScores) {
+		scores.insert(scores.end(), newScores.begin(), newScores.end());
+		calculateAverage();
+	}
+
 	//计算平均分函数
 	void calculateAverage() {
 		float sum = 0;
@@ -203,8 +209,8 @@ void listStudents(vector<Student>& students) {
 //插入学生成绩函数
 void insertScores(vector<string>& args) {
 	cout << "插入学生成绩函数调用\n";
-	cout << args[2] << endl;
-	cout << args[3] << endl;
+	vector<float> scores;
+	scores.push_back(stof(args[2]));
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
