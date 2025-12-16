@@ -41,7 +41,8 @@ public:
 
 	//插入成绩函数
 	void insertScores(const vector<float>& newScores) {
-		scores.insert(scores.end(), newScores.begin(), newScores.end());
+		//scores.insert(scores.end(), newScores.begin(), newScores.end());
+		scores = newScores;		//直接覆盖
 		calculateAverage();
 	}
 
