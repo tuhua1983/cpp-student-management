@@ -16,6 +16,7 @@ void processCommand(vector<string>&, vector<Student>&);
 void insertStudent(vector<string>&, vector<Student>&);
 void insertScores(vector<string>&, vector<Student>&);
 void listStudents(vector<Student>&);
+void deleteStudent(vector<string>&, vector<Student>&);
 
 //学生类
 class Student {
@@ -233,6 +234,48 @@ void insertScores(vector<string>& args, vector<Student>& students) {
 	{
 		cout << "未找到该学生，无法插入成绩\n";
 		return;
+	}
+
+	//保存students到文件
+	ofstream outFile("students.txt", ios::trunc);
+	if (outFile.is_open()) {
+		for (const Student& student : students)
+		{
+			outFile << student.serialize();
+		}
+		outFile.close();
+	}
+	else {
+		cout << "无法打开文件进行写入" << endl;
+	}
+}
+
+// 删除学生信息函数
+void deleteStudent(vector<string>& args, vector<Student>& students) {
+	cout << "删除学生信息函数调用" << endl;
+
+	//判断以什么方式删除
+	if (args.size() < 3) {
+		cout << "参数缺少\n";
+		return;
+	}
+	if(args[2] == "--id"){
+		int idToDelete = stoi(args[3]);
+
+		auto it = students.begin();
+		while (it != students.end()) {
+			if (it->getId() == idToDelete) {
+				it = students.erase(it);
+				cout << "已删除学号为 " << idToDelete << " 的学生信息。" << endl;
+			}
+			else {
+				++it;
+			}
+		}
+
+	}
+	else if (args[2] == "--name") {
+
 	}
 
 	//保存students到文件
