@@ -210,15 +210,19 @@ void listStudents(vector<Student>& students) {
 void insertScores(vector<string>& args, vector<Student>& students) {
 	cout << "插入学生成绩函数调用\n";
 	vector<float> scores;
-	for (int i = 2; i < args.size(); i++)
+	cout << "创建成绩暂存容器完毕\n";
+	cout << "args.size()=" << args.size() << "\n";
+	for (int i = 3; i < args.size(); i++)
 	{
 		scores.push_back(stof(args[i]));
 		cout << "插入成绩：" << args[i] << "\n";
 	}
+
+	//查找学生并插入成绩
 	bool found = false;
 	for(Student& student : students)
 	{
-		if (student.getName() == args[1])
+		if (student.getName() == args[2])
 		{
 			student.insertScores(scores);
 			found = true;
