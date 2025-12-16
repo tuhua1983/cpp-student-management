@@ -211,6 +211,13 @@ void listStudents(vector<Student>& students) {
 //插入学生成绩函数
 void insertScores(vector<string>& args, vector<Student>& students) {
 	cout << "插入学生成绩函数调用\n";
+
+	//判断参数是否足够
+	if (args.size() < 3) {
+		cout << "参数缺少\n";
+		return;
+	}
+
 	vector<float> scores;
 	cout << "创建成绩暂存容器完毕\n";
 	cout << "args.size()=" << args.size() << "\n";
