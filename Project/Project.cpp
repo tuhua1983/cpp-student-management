@@ -151,7 +151,7 @@ void processCommand(vector<string>& args, vector<Student>& students){
 	}
 	//"-d" 删除学生信息
 	else if (command == "-d") {
-		//deleteStudent();
+		deleteStudent(args,students);
 		return;
 	}
 	//"-u" 更新学生信息
