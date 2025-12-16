@@ -68,7 +68,7 @@ public:
 	}
 
 	//序列化
-	string serialize() {
+	string serialize() const {
 		ostringstream os;
 		os << id << "," << name << ",";
 		for (int i = 0; i < scores.size(); i++)
@@ -214,12 +214,32 @@ void insertScores(vector<string>& args, vector<Student>& students) {
 	{
 		scores.push_back(stof(args[i]));
 	}
+	bool found = false;
 	for(Student& student : students)
 	{
 		if (student.getName() == args[1])
 		{
 			student.insertScores(scores);
+			found = true;
 		}
+	}
+	if (found == false)
+	{
+		cout << "未找到该学生，无法插入成绩\n";
+		return;
+	}
+
+	//保存students到文件
+	ofstream outFile("students.txt", ios::trunc);
+	if (outFile.is_open()) {
+		for (const Student& student : students)
+		{
+			outFile << student.serialize();
+		}
+		outFile.close();
+	}
+	else {
+		cout << "无法打开文件进行写入" << endl;
 	}
 }
 
