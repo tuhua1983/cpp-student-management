@@ -213,6 +213,7 @@ void insertScores(vector<string>& args, vector<Student>& students) {
 	for (int i = 2; i < args.size(); i++)
 	{
 		scores.push_back(stof(args[i]));
+		cout << "插入成绩：" << args[i] << "\n";
 	}
 	bool found = false;
 	for(Student& student : students)
