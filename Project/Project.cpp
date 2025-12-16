@@ -275,7 +275,18 @@ void deleteStudent(vector<string>& args, vector<Student>& students) {
 
 	}
 	else if (args[2] == "--name") {
+		string nameToDelete = args[3];
+
 		auto it = students.begin();
+		while (it != students.end()) {
+			if (it->getName() == nameToDelete) {
+				it = students.erase(it);
+				cout << "已删除姓名为 " << nameToDelete << " 的学生信息。" << endl;
+			}
+			else {
+				++it;
+			}
+		}
 	}
 
 	//保存students到文件
