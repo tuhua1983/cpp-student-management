@@ -275,7 +275,7 @@ void deleteStudent(vector<string>& args, vector<Student>& students) {
 
 	}
 	else if (args[2] == "--name") {
-
+		auto it = students.begin();
 	}
 
 	//保存students到文件
