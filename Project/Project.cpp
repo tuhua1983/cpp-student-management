@@ -17,7 +17,7 @@ void insertStudent(vector<string>&, vector<Student>&);
 void insertScores(vector<string>&, vector<Student>&);
 void listStudents(vector<Student>&);
 void deleteStudent(vector<string>&, vector<Student>&);
-void searchStudent(vector<string>&, vector<Student>&);
+vector<vector<Student>::iterator> searchStudent(vector<string>&, vector<Student>&);
 
 //学生类
 class Student {
@@ -284,7 +284,7 @@ void deleteStudent(vector<string>& args, vector<Student>& students) {
 		auto it = students.begin();
 		while (it != students.end()) {
 			if (it->getId() == idToDelete) {
-				it = students.erase(it);
+				it = students.erase(it);//it已被删除，所以要让it接收erase()返回的下一个迭代器。
 				cout << "已删除学号为 " << idToDelete << " 的学生信息。" << endl;
 				found = true;
 			}
@@ -343,8 +343,34 @@ void deleteStudent(vector<string>& args, vector<Student>& students) {
 }
 
 //查询学生信息函数
-void searchStudent(vector<string>& args, vector<Student>& students) {
+vector<vector<Student>::iterator> searchStudent(vector<string>& args, vector<Student>& students) {
 	cout << "查询学生信息函数调用" << endl;
+	//校验参数
+	if (args.size() < 4) {
+		cout << "参数缺少(--id/--name)\n";
+		return;
+	}
+
+	vector<vector<Student>::iterator> its;
+
+	if (args[2] == "--id") {
+		int id = stoi(args[3]);
+
+		auto it = students.begin();
+		while (it != students.end()) {
+			if (it->getId() == id)
+			{
+				its.push_back(it);
+			}
+		}
+	}
+	else if (args[2]=="--name")
+	{
+
+	}
+	else {
+		cout << "无效的查询方式(--id/--name)\n";
+	}
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
