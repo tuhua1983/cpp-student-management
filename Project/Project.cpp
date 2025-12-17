@@ -263,12 +263,21 @@ void deleteStudent(vector<string>& args, vector<Student>& students) {
 
 	bool found = false;
 
-	//判断以什么方式删除
+	//校验参数
 	if (args.size() < 3) {
 		cout << "参数缺少\n";
 		return;
 	}
+
+	//判断以什么方式删除
 	if(args[2] == "--id"){
+
+		//二次校验参数
+		if (args.size() < 4) {
+			cout << "参数缺少\n";
+			return;
+		}
+
 		int idToDelete = stoi(args[3]);
 
 		auto it = students.begin();
@@ -289,6 +298,13 @@ void deleteStudent(vector<string>& args, vector<Student>& students) {
 
 	}
 	else if (args[2] == "--name") {
+
+		//二次校验参数
+		if (args.size() < 4) {
+			cout << "参数缺少\n";
+			return;
+		}
+
 		string nameToDelete = args[3];
 
 		auto it = students.begin();
