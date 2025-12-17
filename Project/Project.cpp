@@ -345,13 +345,14 @@ void deleteStudent(vector<string>& args, vector<Student>& students) {
 //查询学生信息函数
 vector<vector<Student>::iterator> searchStudent(vector<string>& args, vector<Student>& students) {
 	cout << "查询学生信息函数调用" << endl;
+
+	vector<vector<Student>::iterator> its;
+
 	//校验参数
 	if (args.size() < 4) {
 		cout << "参数缺少(--id/--name)\n";
-		return;
+		return its;
 	}
-
-	vector<vector<Student>::iterator> its;
 
 	if (args[2] == "--id") {
 		int id = stoi(args[3]);
@@ -371,6 +372,8 @@ vector<vector<Student>::iterator> searchStudent(vector<string>& args, vector<Stu
 	else {
 		cout << "无效的查询方式(--id/--name)\n";
 	}
+
+	return its;
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
