@@ -285,6 +285,7 @@ void deleteStudent(vector<string>& args, vector<Student>& students) {
 			if (it->getId() == idToDelete) {
 				it = students.erase(it);
 				cout << "已删除学号为 " << idToDelete << " 的学生信息。" << endl;
+				found = true;
 			}
 			else {
 				++it;
@@ -312,6 +313,7 @@ void deleteStudent(vector<string>& args, vector<Student>& students) {
 			if (it->getName() == nameToDelete) {
 				it = students.erase(it);
 				cout << "已删除姓名为 " << nameToDelete << " 的学生信息。" << endl;
+				found = true;
 			}
 			else {
 				++it;
