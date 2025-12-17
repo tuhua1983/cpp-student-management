@@ -17,6 +17,7 @@ void insertStudent(vector<string>&, vector<Student>&);
 void insertScores(vector<string>&, vector<Student>&);
 void listStudents(vector<Student>&);
 void deleteStudent(vector<string>&, vector<Student>&);
+void searchStudent(vector<string>&, vector<Student>&);
 
 //学生类
 class Student {
@@ -107,11 +108,11 @@ public:
 };
 
 //主函数
-int main(int argc,char* argv[])
+int main(int argc, char* argv[])
 {
-	if (argc<2)
+	if (argc < 2)
 	{
-		cout <<"请通过终端操作,或输入正确的参数\n";
+		cout << "请通过终端操作,或输入正确的参数\n";
 		return 0;
 	}
 
@@ -130,28 +131,28 @@ int main(int argc,char* argv[])
 	else {											//文件打开失败
 		cout << "无法打开文件进行读取" << endl;
 	}
-	
+
 	vector<string> args(argv, argv + argc);
-	processCommand(args,students);
+	processCommand(args, students);
 	return 0;
 }
 
 //指令识别函数
-void processCommand(vector<string>& args, vector<Student>& students){
+void processCommand(vector<string>& args, vector<Student>& students) {
 	cout << "指令识别函数调用" << endl;
 	string command = args[1];
 	//"-add" 插入学生信息
 	if (command == "-add") {
-		insertStudent(args,students);
+		insertStudent(args, students);
 		return;
 	}
 	//"-i"插入学生成绩
 	else if (command == "-i") {
-		insertScores(args,students);
+		insertScores(args, students);
 	}
 	//"-d" 删除学生信息
 	else if (command == "-d") {
-		deleteStudent(args,students);
+		deleteStudent(args, students);
 		return;
 	}
 	//"-u" 更新学生信息
@@ -161,7 +162,7 @@ void processCommand(vector<string>& args, vector<Student>& students){
 	}
 	//"-s" 查询学生信息
 	else if (command == "-s") {
-		//searchStudent();
+		searchStudent(args,students);
 		return;
 	}
 	//"-l" 列出所有学生信息
@@ -229,7 +230,7 @@ void insertScores(vector<string>& args, vector<Student>& students) {
 
 	//查找学生并插入成绩
 	bool found = false;
-	for(Student& student : students)
+	for (Student& student : students)
 	{
 		if (student.getName() == args[2])
 		{
@@ -270,7 +271,7 @@ void deleteStudent(vector<string>& args, vector<Student>& students) {
 	}
 
 	//判断以什么方式删除
-	if(args[2] == "--id"){
+	if (args[2] == "--id") {
 
 		//二次校验参数
 		if (args.size() < 4) {
@@ -339,6 +340,11 @@ void deleteStudent(vector<string>& args, vector<Student>& students) {
 	else {
 		cout << "无法打开文件进行写入" << endl;
 	}
+}
+
+//查询学生信息函数
+void searchStudent(vector<string>& args, vector<Student>& students) {
+	cout << "查询学生信息函数调用" << endl;
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
