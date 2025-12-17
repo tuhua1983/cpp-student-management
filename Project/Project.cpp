@@ -162,7 +162,7 @@ void processCommand(vector<string>& args, vector<Student>& students) {
 	}
 	//"-s" 查询学生信息
 	else if (command == "-s") {
-		searchStudent(args,students);
+		searchStudent(args, students);
 		return;
 	}
 	//"-l" 列出所有学生信息
@@ -363,11 +363,21 @@ vector<vector<Student>::iterator> searchStudent(vector<string>& args, vector<Stu
 			{
 				its.push_back(it);
 			}
+			++it;
 		}
 	}
-	else if (args[2]=="--name")
+	else if (args[2] == "--name")
 	{
+		string name = args[3];
 
+		auto it = students.begin();
+		while (it != students.end()) {
+			if (it->getName() == name)
+			{
+				its.push_back(it);
+			}
+			++it;
+		}
 	}
 	else {
 		cout << "无效的查询方式(--id/--name)\n";
