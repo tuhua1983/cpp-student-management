@@ -261,6 +261,8 @@ void insertScores(vector<string>& args, vector<Student>& students) {
 void deleteStudent(vector<string>& args, vector<Student>& students) {
 	cout << "删除学生信息函数调用" << endl;
 
+	bool found = false;
+
 	//判断以什么方式删除
 	if (args.size() < 3) {
 		cout << "参数缺少\n";
@@ -280,6 +282,11 @@ void deleteStudent(vector<string>& args, vector<Student>& students) {
 			}
 		}
 
+		if (found == false) {
+			cout << "未找到该学生，无法删除\n";
+			return;
+		}
+
 	}
 	else if (args[2] == "--name") {
 		string nameToDelete = args[3];
@@ -293,6 +300,11 @@ void deleteStudent(vector<string>& args, vector<Student>& students) {
 			else {
 				++it;
 			}
+		}
+
+		if (found == false) {
+			cout << "未找到该学生，无法删除\n";
+			return;
 		}
 	}
 
