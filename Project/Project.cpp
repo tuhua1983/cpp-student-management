@@ -265,7 +265,7 @@ void deleteStudent(vector<string>& args, vector<Student>& students) {
 
 	//校验参数
 	if (args.size() < 3) {
-		cout << "参数缺少\n";
+		cout << "参数缺少(--id/--name)\n";
 		return;
 	}
 
@@ -292,11 +292,6 @@ void deleteStudent(vector<string>& args, vector<Student>& students) {
 			}
 		}
 
-		if (found == false) {
-			cout << "未找到该学生，无法删除\n";
-			return;
-		}
-
 	}
 	else if (args[2] == "--name") {
 
@@ -320,10 +315,16 @@ void deleteStudent(vector<string>& args, vector<Student>& students) {
 			}
 		}
 
-		if (found == false) {
-			cout << "未找到该学生，无法删除\n";
-			return;
-		}
+	}
+	else
+	{
+		cout << "无效的删除方式参数(--id/--name)\n";
+	}
+
+	//未找到学生
+	if (found == false) {
+		cout << "未找到该学生，无法删除\n";
+		return;
 	}
 
 	//保存students到文件
