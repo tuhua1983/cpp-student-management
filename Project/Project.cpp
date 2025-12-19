@@ -69,6 +69,10 @@ public:
 	float getAverage() const {
 		return average;
 	}
+	//获取成绩
+	vector<float> getScores() const {
+		return scores;
+	}
 
 	//序列化
 	string serialize() const {
@@ -166,6 +170,9 @@ void processCommand(vector<string>& args, vector<Student>& students) {
 		for ( vector<Student>::iterator it: its )
 		{
 			cout << "学号:\t" << it->getId() << "姓名:\t" << it->getName() << "平均分:\t" << it->getAverage() << "\n";
+			for (  ) {
+
+			}
 		}
 		return;
 	}
