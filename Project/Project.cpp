@@ -173,7 +173,7 @@ void processCommand(vector<string>& args, vector<Student>& students) {
 			cout << "学号:" << it->getId() << "\t姓名:" << it->getName() << "\t平均分:" << it->getAverage() << "\n";
 			cout << "成绩:";
 			for (float scores : it->getScores() ) {
-				cout << scores << "\t";
+				cout << "  " << scores;
 			}
 			cout << "\n\n";
 		}
