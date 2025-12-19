@@ -162,7 +162,11 @@ void processCommand(vector<string>& args, vector<Student>& students) {
 	}
 	//"-s" 查询学生信息
 	else if (command == "-s") {
-		searchStudent(args, students);
+		vector<vector<Student>::iterator> its = searchStudent(args, students);
+		for ( vector<Student>::iterator it: its )
+		{
+			cout << "学号:\t" << it->getId() << "姓名:\t" << it->getName() << "平均分:\t" << it->getAverage() << "\n";
+		}
 		return;
 	}
 	//"-l" 列出所有学生信息
