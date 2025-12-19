@@ -167,6 +167,7 @@ void processCommand(vector<string>& args, vector<Student>& students) {
 	//"-s" 查询学生信息
 	else if (command == "-s") {
 		vector<vector<Student>::iterator> its = searchStudent(args, students);
+		cout << "--------------------------\n";
 		for ( vector<Student>::iterator it: its )
 		{
 			cout << "学号:" << it->getId() << "\t姓名:" << it->getName() << "\t平均分:" << it->getAverage() << "\n";
@@ -174,7 +175,7 @@ void processCommand(vector<string>& args, vector<Student>& students) {
 			for (float scores : it->getScores() ) {
 				cout << scores << "\t";
 			}
-			cout << "\n";
+			cout << "\n\n";
 		}
 		return;
 	}
