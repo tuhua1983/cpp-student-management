@@ -366,6 +366,8 @@ vector<vector<Student>::iterator> searchStudent(vector<string>& args, vector<Stu
 		return its;
 	}
 
+	bool found = false;
+
 	if (args[2] == "--id") {
 		int id = stoi(args[3]);
 
@@ -374,6 +376,7 @@ vector<vector<Student>::iterator> searchStudent(vector<string>& args, vector<Stu
 			if (it->getId() == id)
 			{
 				its.push_back(it);
+				found = true;
 			}
 			++it;
 		}
@@ -387,12 +390,17 @@ vector<vector<Student>::iterator> searchStudent(vector<string>& args, vector<Stu
 			if (it->getName() == name)
 			{
 				its.push_back(it);
+				found = true;
 			}
 			++it;
 		}
 	}
 	else {
 		cout << "无效的查询方式(--id/--name)\n";
+	}
+
+	if (!found) {
+		cout << "未找到相关数据\n";
 	}
 
 	return its;
