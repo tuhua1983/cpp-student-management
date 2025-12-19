@@ -169,7 +169,8 @@ void processCommand(vector<string>& args, vector<Student>& students) {
 		vector<vector<Student>::iterator> its = searchStudent(args, students);
 		for ( vector<Student>::iterator it: its )
 		{
-			cout << "学号:\t" << it->getId() << "姓名:\t" << it->getName() << "平均分:\t" << it->getAverage() << "\n";
+			cout << "学号:" << it->getId() << "\t姓名:" << it->getName() << "\t平均分:" << it->getAverage() << "\n";
+			cout << "成绩:";
 			for (float scores : it->getScores() ) {
 				cout << scores << "\t";
 			}
