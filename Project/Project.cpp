@@ -262,6 +262,7 @@ void insertScores(vector<string>& args, vector<Student>& students) {
 			if (student.getId() == id)
 			{
 				student.insertScores(scores);
+				found = true;
 			}
 		}
 	}
