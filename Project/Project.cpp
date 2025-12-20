@@ -236,22 +236,38 @@ void insertScores(vector<string>& args, vector<Student>& students) {
 	vector<float> scores;
 	cout << "创建成绩暂存容器完毕\n";
 	cout << "args.size()=" << args.size() << "\n";
-	for (int i = 3; i < args.size(); i++)
+	for (int i = 4; i < args.size(); i++)
 	{
 		scores.push_back(stof(args[i]));
 		cout << "插入成绩：" << args[i] << "\n";
 	}
 
-	//查找学生并插入成绩
 	bool found = false;
-	for (Student& student : students)
-	{
-		if (student.getName() == args[2])
+
+	if (args[2] == "--name") {
+		for (Student& student : students)
 		{
-			student.insertScores(scores);
-			found = true;
+			if (student.getName() == args[3])
+			{
+				student.insertScores(scores);
+				found = true;
+			}
 		}
 	}
+	else if (args[2]=="--id")
+	{
+		int id = stoi(args[3]);
+		for (Student& student : students)
+		{
+			if (student.getId() == id)
+			{
+				student.insertScores(scores);
+			}
+		}
+	}
+
+	//查找学生并插入成绩
+	
 	if (found == false)
 	{
 		cout << "未找到该学生，无法插入成绩\n";
