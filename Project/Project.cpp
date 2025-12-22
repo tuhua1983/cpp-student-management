@@ -18,6 +18,7 @@ void insertScores(vector<string>&, vector<Student>&);
 void listStudents(vector<Student>&);
 void deleteStudent(vector<string>&, vector<Student>&);
 vector<vector<Student>::iterator> searchStudent(vector<string>&, vector<Student>&);
+void sortStudentsById(vector<Student>&);
 
 //学生类
 class Student {
