@@ -425,7 +425,7 @@ vector<vector<Student>::iterator> searchStudent(vector<string>& args, vector<Stu
 	return its;
 }
 
-//排序函数
+//排序函数(按id)
 void sortStudentsById(vector<Student>& students) {
 	
 }
