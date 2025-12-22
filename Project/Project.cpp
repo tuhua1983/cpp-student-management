@@ -426,7 +426,9 @@ vector<vector<Student>::iterator> searchStudent(vector<string>& args, vector<Stu
 }
 
 //排序函数
-
+void sortStudentsById(vector<Student>& students) {
+	
+}
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
 // 调试程序: F5 或调试 >“开始调试”菜单
