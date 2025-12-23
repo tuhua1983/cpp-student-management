@@ -212,6 +212,9 @@ void insertStudent(vector<string>& args, vector<Student>& students) {
 	newStudent.initialize(id, name);
 	students.push_back(newStudent);
 
+	//排序
+	sortStudentsById(students);
+
 	//保存students到文件
 	ofstream outFile("students.txt", ios::app);
 	if (outFile.is_open()) {
