@@ -216,9 +216,12 @@ void insertStudent(vector<string>& args, vector<Student>& students) {
 	sortStudentsById(students);
 
 	//保存students到文件
-	ofstream outFile("students.txt", ios::app);
+	ofstream outFile("students.txt", ios::trunc);
 	if (outFile.is_open()) {
-		outFile << newStudent.serialize();
+		for (const Student& student : students)
+		{
+			outFile << student.serialize();
+		}
 		outFile.close();
 	}
 	else {
