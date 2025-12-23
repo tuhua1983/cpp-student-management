@@ -223,6 +223,7 @@ void insertStudent(vector<string>& args, vector<Student>& students) {
 			outFile << student.serialize();
 		}
 		outFile.close();
+		cout << "插入学生成功\n";
 	}
 	else {
 		cout << "无法打开文件进行写入" << endl;
