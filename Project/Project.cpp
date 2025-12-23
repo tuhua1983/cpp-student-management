@@ -405,18 +405,35 @@ vector<vector<Student>::iterator> searchStudent(vector<string>& args, vector<Stu
 	if (args[2] == "--id") {
 		int id=1;
 		cout << "args[3]的大小是:" << args[3].size() << "\n";
-		if(args[3].size() == 1)
+		if (args[3].size() == 1) {
 			id = stoi(args[3]);
-
-		auto it = students.begin();
-		while (it != students.end()) {
-			if (it->getId() == id)
-			{
-				its.push_back(it);
-				found = true;
+			auto it = students.begin();
+			while (it != students.end()) {
+				if (it->getId() == id)
+				{
+					its.push_back(it);
+					found = true;
+				}
+				++it;
 			}
-			++it;
 		}
+		else
+		{
+			for (int i = 0; i < args[3].size(); i += 2) {
+				//id = stoi(args[3][i]);
+
+				auto it = students.begin();
+				while (it != students.end()) {
+					if (it->getId() == id)
+					{
+						its.push_back(it);
+						found = true;
+					}
+					++it;
+				}
+			}
+		}
+
 	}
 	else if (args[2] == "--name")
 	{
