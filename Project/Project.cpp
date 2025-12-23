@@ -113,6 +113,10 @@ public:
 		return Student(id, name, scores);
 	}
 
+	//重载小于运算符(按id排序)
+	bool operator<(const Student& other) const {
+		return this->id < other.id;
+	}
 };
 
 //主函数
@@ -431,7 +435,7 @@ vector<vector<Student>::iterator> searchStudent(vector<string>& args, vector<Stu
 
 //排序函数(按id)
 void sortStudentsById(vector<Student>& students) {
-	
+	sort(students.begin(), students.end());
 }
 
 
