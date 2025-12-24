@@ -404,7 +404,7 @@ vector<vector<Student>::iterator> searchStudent(vector<string>& args, vector<Stu
 
 	if (args[2] == "--id") {
 		int id = 1;
-		//cout << "args[3]的大小是:" << args[3].size() << "\n";
+		cout << "args[3]的大小是:" << args[3].size() << "\n";
 		if (args[3].size() == 1) {
 			id = stoi(args[3]);
 			auto it = students.begin();
@@ -417,8 +417,8 @@ vector<vector<Student>::iterator> searchStudent(vector<string>& args, vector<Stu
 				++it;
 			}
 		}
-		else if (args[2][1] == ',' && args.size() % 2 == 1) {
-			stringstream ss(args[2]);
+		else if (args[3][1] == ',' && args.size() % 2 == 1) {
+			stringstream ss(args[3]);
 			string token;
 
 			while (getline(ss, token, ',')) {
