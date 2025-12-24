@@ -434,6 +434,10 @@ vector<vector<Student>::iterator> searchStudent(vector<string>& args, vector<Stu
 				}
 			}
 		}
+		else
+		{
+			cout << "错误\n";
+		}
 
 	}
 	else if (args[2] == "--name")
