@@ -417,7 +417,7 @@ vector<vector<Student>::iterator> searchStudent(vector<string>& args, vector<Stu
 				++it;
 			}
 		}
-		else if (args[3][1] == ',' && args.size() % 2 == 1) {
+		else if (args[3][1] == ',' && args[3].size() % 2 == 1) {
 			stringstream ss(args[3]);
 			string token;
 
