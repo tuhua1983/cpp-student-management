@@ -176,11 +176,11 @@ void processCommand(vector<string>& args, vector<Student>& students) {
 	else if (command == "-s") {
 		vector<vector<Student>::iterator> its = searchStudent(args, students);
 		cout << "--------------------------\n";
-		for ( vector<Student>::iterator it: its )
+		for (vector<Student>::iterator it : its)
 		{
 			cout << "学号:" << it->getId() << "\t姓名:" << it->getName() << "\t平均分:" << it->getAverage() << "\n";
 			cout << "成绩:";
-			for (float scores : it->getScores() ) {
+			for (float scores : it->getScores()) {
 				cout << "  " << scores;
 			}
 			cout << "\n\n";
@@ -269,7 +269,7 @@ void insertScores(vector<string>& args, vector<Student>& students) {
 			}
 		}
 	}
-	else if (args[2]=="--id")
+	else if (args[2] == "--id")
 	{
 		int id = stoi(args[3]);
 		for (Student& student : students)
@@ -283,7 +283,7 @@ void insertScores(vector<string>& args, vector<Student>& students) {
 	}
 
 	//查找学生并插入成绩
-	
+
 	if (found == false)
 	{
 		cout << "未找到该学生，无法插入成绩\n";
@@ -403,8 +403,8 @@ vector<vector<Student>::iterator> searchStudent(vector<string>& args, vector<Stu
 	bool found = false;
 
 	if (args[2] == "--id") {
-		int id=1;
-		cout << "args[3]的大小是:" << args[3].size() << "\n";
+		int id = 1;
+		//cout << "args[3]的大小是:" << args[3].size() << "\n";
 		if (args[3].size() == 1) {
 			id = stoi(args[3]);
 			auto it = students.begin();
@@ -417,11 +417,12 @@ vector<vector<Student>::iterator> searchStudent(vector<string>& args, vector<Stu
 				++it;
 			}
 		}
-		else
-		{
-			for (int i = 0; i < args[3].size(); i += 2) {
-				//id = stoi(args[3][i]);
+		else if (args[2][1] == ',' && args.size() % 2 == 1) {
+			stringstream ss(args[2]);
+			string token;
 
+			while (getline(ss, token, ',')) {
+				id = stoi(token);
 				auto it = students.begin();
 				while (it != students.end()) {
 					if (it->getId() == id)
