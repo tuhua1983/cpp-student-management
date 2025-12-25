@@ -11,7 +11,7 @@ private:
 public:
 
 	Student();
-	Student(int id, std::string name, std::vector<float> scores);
+	Student(int, std::string, std::vector<float>);
 
 	//学生基本信息初始化函数（不包含成绩）
 	void initialize(int id, string name) {
