@@ -9,4 +9,4 @@ Student::Student(int id, std::string name, std::vector<float> scores)
 	calculateAverage();
 }
 	//øΩ±¥ππ‘Ï
-Student::Student(const Student& other):
+Student::Student(const Student& other) :id(other.id), name(other.name), scores(other.scores), average(other.average) {}
